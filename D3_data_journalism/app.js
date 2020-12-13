@@ -90,6 +90,16 @@ d3.csv("data.csv").then(function (stateData) {
     // Create tooltip in the chart
     chartGroup.call(toolTip);
 
-
-
+    // Create event listeners to display and hide the tooltip
+    circleGroup.on("mouseover", function(data) {
+        toolTip.show(data, this);
+    })
+    // onmouseout event
+        .on("mouseout", function(data, index) {
+            toolTip.hide(data);
+        })
+    // Create axes labels
+    chartGroup.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left + 40)
 })
