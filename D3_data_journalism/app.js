@@ -79,9 +79,16 @@ d3.csv("data.csv").then(function (stateData) {
         .attr("fill", "lightblue")
         .attr("opacity", ".5")
 
+    // Initialize tool tip
+    let toolTip = d3.tip()
+        .attr("class", "tooltip")
+        .offset([80, -60])
+        .html(function(d) {
+            return (`${d.state}`)
+        })
 
-
-
+    // Create tooltip in the chart
+    chartGroup.call(toolTip);
 
 
 
