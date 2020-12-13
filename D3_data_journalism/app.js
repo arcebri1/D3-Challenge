@@ -27,6 +27,44 @@ let chartGroup = svg.append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`)
 
 //Import the data from the csv
-d3.csv("data.csv").then(function(stateData) {
+d3.csv("data.csv").then(function (stateData) {
     console.log(stateData);
+
+    // Parse Data/Cast as numbers
+    stateData.forEach(function (data) {
+        data.healthcare = +data.healthcare;
+        data.poverty = +data.poverty;
+    });
+
+    // Create scale functions
+    let xLinearScale = d3.scaleLinear()
+        .domain([0, d3.max(stateData, d => d.poverty)])
+        .range([0, width])
+
+    let yLinearScale = d3.scaleLinear()
+        .domain([0, d3.max(stateData, d => d.poverty)])
+        .range([height, 0])
+
+    // Create axis functions
+    let xAxis = d3.axisBottom(xLinearScale);
+    let yAxis = d3.axisLeft(yLinearScale);
+
+    //  Append Axes to the chart
+    chartGroup.append("g")
+        .attr("transform", `translate(0, ${height})`)
+        .call(xAxis)
+    
+    chartGroup.append("g")
+        .call(yAxis)
+    
+    // Create Circles
+    let circleGroup = chartGroup.selectAll("circle")
+        .data(stateData)
+        .enter()
+        .append("circle")
+        .attr()
+
+
+
+
 })
