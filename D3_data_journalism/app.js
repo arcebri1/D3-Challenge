@@ -23,8 +23,12 @@ let svg = d3.select("#scatter")
     .attr("height", svgHeight)
     .attr("width", svgWidth)
 
+    // console.log(svg);
+
 let chartGroup = svg.append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`)
+
+    // console.log(chartGroup);
 
 //Import the data from the csv
 d3.csv("data.csv").then(function (stateData) {
@@ -41,28 +45,42 @@ d3.csv("data.csv").then(function (stateData) {
         .domain([0, d3.max(stateData, d => d.poverty)])
         .range([0, width])
 
+        // console.log(xLinearScale)
+
     let yLinearScale = d3.scaleLinear()
-        .domain([0, d3.max(stateData, d => d.poverty)])
+        .domain([0, d3.max(stateData, d => d.healthcare)])
         .range([height, 0])
+
+        // console.log(yLinearScale)
 
     // Create axis functions
     let xAxis = d3.axisBottom(xLinearScale);
     let yAxis = d3.axisLeft(yLinearScale);
 
+    // console.log(xAxis)
+    // console.log(yAxis)
+
     //  Append Axes to the chart
     chartGroup.append("g")
         .attr("transform", `translate(0, ${height})`)
         .call(xAxis)
-    
+
     chartGroup.append("g")
         .call(yAxis)
-    
+
     // Create Circles
     let circleGroup = chartGroup.selectAll("circle")
         .data(stateData)
         .enter()
         .append("circle")
-        .attr()
+        .attr("cx", d => xLinearScale(d.poverty))
+        .attr("cy", d => yLinearScale(d.healthcare))
+        .attr("r", "15")
+        .attr("fill", "lightblue")
+        .attr("opacity", ".5")
+
+
+
 
 
 
