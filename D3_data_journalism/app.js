@@ -23,12 +23,12 @@ let svg = d3.select("#scatter")
     .attr("height", svgHeight)
     .attr("width", svgWidth)
 
-    // console.log(svg);
+// console.log(svg);
 
 let chartGroup = svg.append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`)
 
-    // console.log(chartGroup);
+// console.log(chartGroup);
 
 //Import the data from the csv
 d3.csv("data.csv").then(function (stateData) {
@@ -45,13 +45,13 @@ d3.csv("data.csv").then(function (stateData) {
         .domain([0, d3.max(stateData, d => d.poverty)])
         .range([0, width])
 
-        // console.log(xLinearScale)
+    // console.log(xLinearScale)
 
     let yLinearScale = d3.scaleLinear()
         .domain([0, d3.max(stateData, d => d.healthcare)])
         .range([height, 0])
 
-        // console.log(yLinearScale)
+    // console.log(yLinearScale)
 
     // Create axis functions
     let xAxis = d3.axisBottom(xLinearScale);
@@ -83,7 +83,7 @@ d3.csv("data.csv").then(function (stateData) {
     let toolTip = d3.tip()
         .attr("class", "tooltip")
         .offset([80, -60])
-        .html(function(d) {
+        .html(function (d) {
             return (`${d.state}`)
         })
 
@@ -91,15 +91,26 @@ d3.csv("data.csv").then(function (stateData) {
     chartGroup.call(toolTip);
 
     // Create event listeners to display and hide the tooltip
-    circleGroup.on("mouseover", function(data) {
+    circleGroup.on("mouseover", function (data) {
         toolTip.show(data, this);
     })
-    // onmouseout event
-        .on("mouseout", function(data, index) {
+        // onmouseout event
+        .on("mouseout", function (data, index) {
             toolTip.hide(data);
         })
     // Create axes labels
     chartGroup.append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 0 - margin.left + 40)
+        .attr("x", 0 - (height / 2))
+        .attr("dy", "1em")
+        .attr("class", "axisText")
+        .text("Lacks Healthcare (%)");
+
+    chartGroup.append("text")
+        .attr("transform", `translate(${width / 2}, ${height})`)
+        .attr("class", "axisText")
+        .text("in Poverty (%)");
+}).catch(function (error) {
+    console.log(error);
 })
