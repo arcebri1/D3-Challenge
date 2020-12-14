@@ -8,7 +8,7 @@ let svgHeight = 650;
 let margin = {
     top: 100,
     left: 60,
-    bottom: 50,
+    bottom: 60,
     right: 50
 }
 
@@ -77,11 +77,10 @@ d3.csv("data.csv").then(function (stateData) {
         .attr("cy", d => yLinearScale(d.healthcare))
         .attr("class", "stateCircle")
         .attr("r", "15")
-        // .attr("opacity", ".5")
 
     // Initialize tool tip
     let toolTip = d3.tip()
-        .attr("class", "tooltip")
+        .attr("class", "d3-tip")
         .offset([80, -60])
         .html(function (d) {
             return (`${d.state}`)
@@ -108,9 +107,17 @@ d3.csv("data.csv").then(function (stateData) {
         .text("Lacks Healthcare (%)");
 
     chartGroup.append("text")
-        .attr("transform", `translate(${width / 2}, ${height})`)
+        .attr("transform", `translate(${width / 2}, ${height + 50})`)
         .attr("class", "aText")
         .text("in Poverty (%)");
+
+
+    chartGroup.append("text")
+        .attr("class", "stateText")
+        .text(function(d) {
+            return d.abbr
+        })
+
 }).catch(function (error) {
     console.log(error);
 })
