@@ -1,15 +1,15 @@
 // create the variables for the width and height of the svg
 //This creates the viewport
-let svgWidth = 960;
-let svgHeight = 500;
+let svgWidth = 1000;
+let svgHeight = 650;
 
 //create the margins (the space between the viewport and the chart)
 //this is to create the chart
 let margin = {
-    top: 20,
-    left: 40,
-    bottom: 60,
-    right: 100
+    top: 100,
+    left: 60,
+    bottom: 50,
+    right: 50
 }
 
 //create the width and height of the chart
@@ -75,9 +75,9 @@ d3.csv("data.csv").then(function (stateData) {
         .append("circle")
         .attr("cx", d => xLinearScale(d.poverty))
         .attr("cy", d => yLinearScale(d.healthcare))
+        .attr("class", "stateCircle")
         .attr("r", "15")
-        .attr("fill", "lightblue")
-        .attr("opacity", ".5")
+        // .attr("opacity", ".5")
 
     // Initialize tool tip
     let toolTip = d3.tip()
@@ -101,15 +101,15 @@ d3.csv("data.csv").then(function (stateData) {
     // Create axes labels
     chartGroup.append("text")
         .attr("transform", "rotate(-90)")
-        .attr("y", 0 - margin.left + 40)
+        .attr("y", 0 - margin.left + 5)
         .attr("x", 0 - (height / 2))
         .attr("dy", "1em")
-        .attr("class", "axisText")
+        .attr("class", "aText")
         .text("Lacks Healthcare (%)");
 
     chartGroup.append("text")
         .attr("transform", `translate(${width / 2}, ${height})`)
-        .attr("class", "axisText")
+        .attr("class", "aText")
         .text("in Poverty (%)");
 }).catch(function (error) {
     console.log(error);
