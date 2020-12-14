@@ -42,13 +42,13 @@ d3.csv("data.csv").then(function (stateData) {
 
     // Create scale functions
     let xLinearScale = d3.scaleLinear()
-        .domain([0, d3.max(stateData, d => d.poverty)])
+        .domain([0, d3.max(stateData, d => d.poverty) + 2])
         .range([0, width])
 
     // console.log(xLinearScale)
 
     let yLinearScale = d3.scaleLinear()
-        .domain([0, d3.max(stateData, d => d.healthcare)])
+        .domain([0, d3.max(stateData, d => d.healthcare) + 2])
         .range([height, 0])
 
     // console.log(yLinearScale)
@@ -77,6 +77,9 @@ d3.csv("data.csv").then(function (stateData) {
         .attr("cy", d => yLinearScale(d.healthcare))
         .attr("class", "stateCircle")
         .attr("r", "15")
+        .text(function(d) {
+            return (`${d.abbr}`)
+        })
 
     // Initialize tool tip
     let toolTip = d3.tip()
@@ -90,13 +93,14 @@ d3.csv("data.csv").then(function (stateData) {
     chartGroup.call(toolTip);
 
     // Create event listeners to display and hide the tooltip
-    circleGroup.on("mouseover", function (data) {
-        toolTip.show(data, this);
-    })
-        // onmouseout event
-        .on("mouseout", function (data, index) {
-            toolTip.hide(data);
-        })
+    // circleGroup.on("mouseover", function (data) {
+    //     toolTip.show(data, this);
+    // })
+    //     // onmouseout event
+    //     .on("mouseout", function (data, index) {
+    //         toolTip.hide(data);
+    //     })
+
     // Create axes labels
     chartGroup.append("text")
         .attr("transform", "rotate(-90)")
@@ -112,11 +116,11 @@ d3.csv("data.csv").then(function (stateData) {
         .text("in Poverty (%)");
 
 
-    chartGroup.append("text")
-        .attr("class", "stateText")
-        .text(function(d) {
-            return d.abbr
-        })
+    // chartGroup.append("text")
+    //     .attr("class", "stateText")
+    //     // .text(function(d) {
+        //     return d.abbr
+        // })
 
 }).catch(function (error) {
     console.log(error);
