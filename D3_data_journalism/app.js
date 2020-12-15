@@ -3,14 +3,24 @@
 let svgWidth = 1000;
 let svgHeight = 650;
 
+// let svgWidth = 950;
+// let svgHeight = 600;
+
 //create the margins (the space between the viewport and the chart)
-//this is to create the chart
+// this is to create the chart
 let margin = {
     top: 100,
     left: 60,
     bottom: 60,
     right: 50
 }
+
+// let margin = {
+//     top: 20,
+//     left: 40,
+//     bottom: 80,
+//     right: 100
+// }
 
 //create the width and height of the chart
 //the chart is the space where our scatter plot will display
@@ -42,7 +52,7 @@ d3.csv("data.csv").then(function (stateData) {
 
     // Create scale functions
     let xLinearScale = d3.scaleLinear()
-        .domain([d3.min(stateData, d => d.poverty)*.9, d3.max(stateData, d => d.poverty)*1.05])
+        .domain([d3.min(stateData, d => d.poverty) * .9, d3.max(stateData, d => d.poverty) * 1.05])
         .range([0, width])
 
     // let xLinearScale = d3.scaleLinear()
@@ -52,7 +62,7 @@ d3.csv("data.csv").then(function (stateData) {
     // console.log(xLinearScale)
 
     let yLinearScale = d3.scaleLinear()
-        .domain([d3.min(stateData, d => d.healthcare)*.9, d3.max(stateData, d => d.healthcare)*1.1])
+        .domain([d3.min(stateData, d => d.healthcare) * .9, d3.max(stateData, d => d.healthcare) * 1.1])
         .range([height, 0])
 
     // let yLinearScale = d3.scaleLinear()
@@ -85,10 +95,10 @@ d3.csv("data.csv").then(function (stateData) {
         .attr("cy", d => yLinearScale(d.healthcare))
         .attr("class", "stateCircle")
         .attr("r", "15")
-        // .text(d => (d.abbr))
-        // .text(function(d) {
-        //     return (`${d.abbr}`)
-        // })
+    // .text(d => (d.abbr))
+    // .text(function(d) {
+    //     return (`${d.abbr}`)
+    // })
 
     // Initialize tool tip
     let toolTip = d3.tip()
@@ -125,12 +135,15 @@ d3.csv("data.csv").then(function (stateData) {
         .text("in Poverty (%)");
 
 
-    // chartGroup.append("text")
-    //     .attr("class", "stateText")
-    //     // .text(function(d) {
-        //     return d.abbr
-        // })
+    chartGroup.selectAll()
+        .data(stateData)
+        .enter()
+        .append("text")
+        .attr("class", "stateText")
+        .attr("x", d => xLinearScale(d.poverty))
+        .attr("y", d => yLinearScale(d.healthcare))
+        .text(d => (d.abbr))
 
 }).catch(function (error) {
     console.log(error);
-})
+});
