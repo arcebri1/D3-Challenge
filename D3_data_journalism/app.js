@@ -42,14 +42,22 @@ d3.csv("data.csv").then(function (stateData) {
 
     // Create scale functions
     let xLinearScale = d3.scaleLinear()
-        .domain([0, d3.max(stateData, d => d.poverty) + 2])
+        .domain([d3.min(stateData, d => d.poverty)*.9, d3.max(stateData, d => d.poverty)*1.05])
         .range([0, width])
+
+    // let xLinearScale = d3.scaleLinear()
+    //     .domain([8, d3.max(stateData, d => d.poverty) + 2])
+    //     .range([0, width])
 
     // console.log(xLinearScale)
 
     let yLinearScale = d3.scaleLinear()
-        .domain([0, d3.max(stateData, d => d.healthcare) + 2])
+        .domain([d3.min(stateData, d => d.healthcare)*.9, d3.max(stateData, d => d.healthcare)*1.1])
         .range([height, 0])
+
+    // let yLinearScale = d3.scaleLinear()
+    //     .domain([4, d3.max(stateData, d => d.healthcare)])
+    //     .range([height, 0])
 
     // console.log(yLinearScale)
 
@@ -77,29 +85,30 @@ d3.csv("data.csv").then(function (stateData) {
         .attr("cy", d => yLinearScale(d.healthcare))
         .attr("class", "stateCircle")
         .attr("r", "15")
-        .text(function(d) {
-            return (`${d.abbr}`)
-        })
+        // .text(d => (d.abbr))
+        // .text(function(d) {
+        //     return (`${d.abbr}`)
+        // })
 
     // Initialize tool tip
     let toolTip = d3.tip()
         .attr("class", "d3-tip")
         .offset([80, -60])
         .html(function (d) {
-            return (`${d.state}`)
+            return (`${d.state}<br>Poverty: ${d.poverty}%<br>Healthcare:${d.healthcare}%`)
         })
 
     // Create tooltip in the chart
     chartGroup.call(toolTip);
 
     // Create event listeners to display and hide the tooltip
-    // circleGroup.on("mouseover", function (data) {
-    //     toolTip.show(data, this);
-    // })
-    //     // onmouseout event
-    //     .on("mouseout", function (data, index) {
-    //         toolTip.hide(data);
-    //     })
+    circleGroup.on("mouseover", function (data) {
+        toolTip.show(data, this);
+    })
+        // onmouseout event
+        .on("mouseout", function (data, index) {
+            toolTip.hide(data);
+        })
 
     // Create axes labels
     chartGroup.append("text")
