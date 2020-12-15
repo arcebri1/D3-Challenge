@@ -100,10 +100,20 @@ d3.csv("data.csv").then(function (stateData) {
     //     return (`${d.abbr}`)
     // })
 
+    chartGroup.selectAll()
+        .data(stateData)
+        .enter()
+        .append("text")
+        .attr("class", "stateText")
+        .attr("x", d => xLinearScale(d.poverty))
+        .attr("y", d => yLinearScale(d.healthcare) + 5)
+        // .attr("text-anchor", "middle")
+        .text(d => (d.abbr))
+
     // Initialize tool tip
     let toolTip = d3.tip()
         .attr("class", "d3-tip")
-        .offset([80, -60])
+        .offset([0, 0])
         .html(function (d) {
             return (`${d.state}<br>Poverty: ${d.poverty}%<br>Healthcare:${d.healthcare}%`)
         })
@@ -135,14 +145,14 @@ d3.csv("data.csv").then(function (stateData) {
         .text("in Poverty (%)");
 
 
-    chartGroup.selectAll()
-        .data(stateData)
-        .enter()
-        .append("text")
-        .attr("class", "stateText")
-        .attr("x", d => xLinearScale(d.poverty))
-        .attr("y", d => yLinearScale(d.healthcare))
-        .text(d => (d.abbr))
+    // chartGroup.selectAll()
+    //     .data(stateData)
+    //     .enter()
+    //     .append("text")
+    //     .attr("class", "stateText")
+    //     .attr("x", d => xLinearScale(d.poverty))
+    //     .attr("y", d => yLinearScale(d.healthcare))
+    //     .text(d => (d.abbr))
 
 }).catch(function (error) {
     console.log(error);
