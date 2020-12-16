@@ -67,7 +67,8 @@ d3.csv("data.csv").then(function (stateData) {
         .attr("class", "stateCircle")
         .attr("r", "15")
 
-    chartGroup.selectAll()
+    //Create abbr within the circles
+        chartGroup.selectAll()
         .data(stateData)
         .enter()
         .append("text")
@@ -78,18 +79,20 @@ d3.csv("data.csv").then(function (stateData) {
 
     // Initialize tool tip
     let toolTip = d3.tip()
-        .attr("class", "d3-tip")
+        .attr("id", "d3-tip")
         .offset([80, -60])
+        .attr("position", "absolute")
         .html(function (d) {
             return (`${d.state}<br>Poverty: ${d.poverty}%<br>Healthcare: ${d.healthcare}%`)
         })
+   
 
     // Create tooltip in the chart
     chartGroup.call(toolTip);
 
     // Create event listeners to display and hide the tooltip
     circleGroup.on("mouseover", function (data) {
-        toolTip.show(data, this);
+        toolTip.show(data, this)
     })
         // onmouseout event
         .on("mouseout", function (data, index) {

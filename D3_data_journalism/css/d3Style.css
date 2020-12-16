@@ -26,13 +26,14 @@
 /* font size dependent on radius, see app.js */
 .stateText {
   font-family: sans-serif;
-  fill: #fff;
+  fill: rgb(4, 4, 34);
   text-anchor: middle;
+  font-size: small;
 }
 
 .stateCircle {
   fill: #89bdd3;
-  stroke: #e3e3e3;
+  stroke: #030464;
   opacity: 50%;
 }
 
@@ -41,7 +42,7 @@
   margin: 0;
 }
 
-.d3-tip {
+#d3-tip {
   padding: 6px;
   font-size: 12px;
   line-height: 1;
