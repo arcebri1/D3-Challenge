@@ -27,7 +27,7 @@ let chartGroup = svg.append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`)
 
 //Import the data from the csv
-d3.csv("data.csv").then(function (stateData) {
+d3.csv("D3_data_journalism/data.csv").then(function (stateData) {
     // console.log(stateData);
 
     // Parse Data/Cast as numbers
