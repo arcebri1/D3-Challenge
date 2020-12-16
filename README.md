@@ -14,8 +14,11 @@ The data is provided by UCSD Data Science and Visualization Bootcamp.
 
 * I Created and situated the axes and labels to the left and bottom of the chart.
 
+![8-tooltip](Images/8-tooltip.jpg)
+
 * Incorporate d3-tip: Using the `d3-tip.js` plugin developed by [Justin Palmer](https://github.com/Caged), I incorporated tooltips to the circles and displayed each tooltip with the data you mouseover.
 
 - - -
 Contact:
+
 Email: arcebri1@gmail.com
