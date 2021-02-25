@@ -12,7 +12,7 @@ The data set is based on 2014 ACS 1-year estimates from the [US Census Bureau](h
 
 ### What I did (D3 Dabbler):
 
-![4-scatter](Images/4-scatter.jpg)
+![](Images/4-scatter.jpg)
 
 * Created a scatter plot between two of the data variables: `Healthcare vs. Poverty`.
 
@@ -22,7 +22,7 @@ The data set is based on 2014 ACS 1-year estimates from the [US Census Bureau](h
 
 * Incorporated d3-tip: Using the `d3-tip.js` plugin developed by [Justin Palmer](https://github.com/Caged), incorporated tooltips to the circles and displayed each tooltip with the data when you mouseover.
 
-![8-tooltip](Images/8-tooltip.gif)
+![](Images/8-tooltip.gif)
 - - -
 
 The data is provided by UCSD Extension: Data Science and Visualization Bootcamp.
