@@ -2,7 +2,7 @@
 
 - - -
 
-I created a interactive scatterplot using D3 to visualize US Census data.
+I created an interactive scatterplot using D3 to visualize US Census data. You can check it out [here](https://arcebri1.github.io/USCensusVisual/).
 
 - - -
 
